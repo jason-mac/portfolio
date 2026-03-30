@@ -1,5 +1,21 @@
 ---
+const ubcCourses = [
+  'Data Structures & Algorithms',
+  'Machine Learning & Engineering Applications',
+  'Discrete Math',
+  'Relational Database Systems',
+  'Computer Architecture',
+  'Electric Circuits',
+  'Probability Theory',
+];
+
+const douglasCourses: string[] = [
+'Intro to Python',
+'Object Oriented C++',
+'Engineering Design'
+];
 ---
+
 <section id="education" class="py-6 px-6">
   <div class="max-w-5xl mx-auto">
     <div class="bash-prompt animate"><span class="prompt-symbol">~</span> <span class="prompt-dollar">$</span> cat ~/.education</div>
@@ -34,6 +50,21 @@
               </svg>
               <span>Vancouver, British Columbia</span>
             </div>
+{ubcCourses.length > 0 && (
+  <div class="mt-4">
+    <p class="text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2 font-mono">Coursework:</p>
+    <ul class="space-y-1.5">
+      {ubcCourses.map((course) => (
+        <li class="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-300">
+          <svg class="w-4 h-4 flex-shrink-0 text-stone-300 dark:text-stone-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+          </svg>
+          {course}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
           </div>
         </div>
       </div>
@@ -41,9 +72,9 @@
       <div class="animate stagger-2">
         <div class="group relative flex gap-5">
           <div class="hidden sm:flex flex-shrink-0 flex-col items-center">
-<div class="relative z-10 w-[42px] h-[42px] rounded-xl bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 p-1.5">
-  <img src="/douglas_college.png" alt="Douglas College" class="w-full h-full object-contain" />
-</div>
+            <div class="relative z-10 w-[42px] h-[42px] rounded-xl bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 p-1.5">
+              <img src="/douglas_college.png" alt="Douglas College" class="w-full h-full object-contain" />
+            </div>
           </div>
           <div class="flex-1 min-w-0 rounded-2xl border bg-white dark:bg-stone-900/80 border-stone-200/50 dark:border-stone-800/50 p-5 card-hover">
             <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
@@ -66,6 +97,21 @@
               </svg>
               <span>New Westminster, British Columbia</span>
             </div>
+{douglasCourses.length > 0 && (
+  <div class="mt-4">
+    <p class="text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2 font-mono">Coursework:</p>
+    <ul class="space-y-1.5">
+      {douglasCourses.map((course) => (
+        <li class="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-300">
+          <svg class="w-4 h-4 flex-shrink-0 text-stone-300 dark:text-stone-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+          </svg>
+          {course}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
           </div>
         </div>
       </div>
