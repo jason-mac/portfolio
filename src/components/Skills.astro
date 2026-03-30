@@ -36,7 +36,11 @@ const skillCategories = [
 
 <section id="skills" class="py-6 px-6">
   <div class="max-w-5xl mx-auto">
-    <div class="bash-prompt animate"><span class="prompt-symbol">~</span> <span class="prompt-dollar">$</span> cat skills/{languages,frameworks&libraries,tools}</div>
+<div class="bash-prompt animate">
+  <span class="prompt-symbol">~</span>
+  <span class="prompt-dollar">$</span>
+  {'cat ~/.skills'}
+</div>
     <h2 class="section-title animate">Skills</h2>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {skillCategories.map((category, catIdx) => (
