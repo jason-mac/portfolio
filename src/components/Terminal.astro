@@ -1,0 +1,233 @@
+---
+---
+
+<section id="terminal" class="py-12 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="animate rounded-2xl border border-stone-200/60 dark:border-stone-800/60 bg-stone-900 dark:bg-stone-950 overflow-hidden shadow-xl">
+      <!-- Title bar -->
+      <div class="flex items-center gap-2 px-4 py-3 bg-stone-800 dark:bg-stone-900 border-b border-stone-700/50">
+        <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+        </div>
+        <span class="text-xs text-stone-400 font-mono ml-2">jason@website ~ </span>
+      </div>
+
+      <!-- Terminal body -->
+      <div class="p-4 font-mono text-sm min-h-[200px] max-h-[400px] overflow-y-auto" id="terminal-body">
+        <div class="text-stone-400 mb-3">
+          <span class="text-emerald-400">Welcome!</span> Type <span class="text-amber-400">help</span> to see available commands.
+        </div>
+        <div id="terminal-output"></div>
+        <div class="flex items-center gap-2" id="terminal-input-line">
+          <span class="text-emerald-400 shrink-0">~</span>
+          <span class="text-stone-400 shrink-0">$</span>
+          <div class="relative flex-1">
+            <span id="terminal-ghost" class="absolute inset-0 text-stone-600 pointer-events-none font-mono text-sm whitespace-pre"></span>
+            <input
+              type="text"
+              id="terminal-input"
+              class="relative w-full bg-transparent text-stone-200 outline-none caret-emerald-400 font-mono text-sm"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const input = document.getElementById('terminal-input') as HTMLInputElement;
+  const output = document.getElementById('terminal-output')!;
+  const body = document.getElementById('terminal-body')!;
+  const ghost = document.getElementById('terminal-ghost')!;
+
+  const commandHistory: string[] = [];
+  let historyIndex = -1;
+
+  const allCommands = [
+    'help', 'neofetch', 'whoami', 'history', 'ls', 'ls skills',
+    'cat readme', 'cat readme.md', 'cowsay', 'clear', 'exit',
+    'sudo hire jason', 'sudo rm -rf /', 'rm -rf /', 'ping',
+    'pwd', 'date', 'vim', 'emacs', 'nano', 'cd', 'cd ..', 'cd ~', 'quit',
+  ];
+
+  function updateGhost() {
+    const val = input.value;
+    if (!val) {
+      ghost.textContent = '';
+      return;
+    }
+    const match = allCommands.find(c => c.startsWith(val.toLowerCase()) && c !== val.toLowerCase());
+    if (match) {
+      ghost.textContent = val + match.slice(val.length);
+    } else {
+      ghost.textContent = '';
+    }
+  }
+
+  input.addEventListener('input', updateGhost);
+
+  const neofetch = `
+<span class="text-emerald-400">        .--.        </span>  <span class="text-stone-200 font-bold">jason@website</span>
+<span class="text-emerald-400">       |o_o |       </span>  <span class="text-stone-500">--------------</span>
+<span class="text-emerald-400">       |:_/ |       </span>  <span class="text-amber-400">Role:</span> <span class="text-stone-300">Computer Engineering Student</span>
+<span class="text-emerald-400">      //   \\ \\      </span>  <span class="text-amber-400">Stack:</span> <span class="text-stone-300">C++, Rust, TypeScript, Python</span>
+<span class="text-emerald-400">     (|     | )     </span>  <span class="text-amber-400">Focus:</span> <span class="text-stone-300">Full Stack & Systems</span>
+<span class="text-emerald-400">    /'\\_   _/\`\\    </span>  <span class="text-amber-400">School:</span> <span class="text-stone-300">University of British Columbia</span>
+<span class="text-emerald-400">    \\___)=(___/    </span>  <span class="text-amber-400">Hobbies:</span> <span class="text-stone-300">Gym, Basketball, Gaming</span>
+`.trim();
+
+  const commands: Record<string, () => string> = {
+    help: () => `
+<span class="text-stone-500">Available commands:</span>
+  <span class="text-amber-400">help</span>        <span class="text-stone-500">—</span> show this message
+  <span class="text-amber-400">neofetch</span>    <span class="text-stone-500">—</span> system info
+  <span class="text-amber-400">ls skills</span>   <span class="text-stone-500">—</span> list technical skills
+  <span class="text-amber-400">whoami</span>      <span class="text-stone-500">—</span> about me
+  <span class="text-amber-400">history</span>     <span class="text-stone-500">—</span> work history (short)
+  <span class="text-amber-400">cat readme</span>  <span class="text-stone-500">—</span> read the readme
+  <span class="text-amber-400">cowsay</span>      <span class="text-stone-500">—</span> moo
+  <span class="text-amber-400">clear</span>       <span class="text-stone-500">—</span> clear terminal
+  <span class="text-amber-400">exit</span>        <span class="text-stone-500">—</span> try it and see`.trim(),
+
+    neofetch: () => neofetch,
+
+    whoami: () => `<span class="text-stone-300">Jason Mac — 3rd year Computer Engineering student at UBC who loves building things across the stack, hitting the gym, and balling.</span>`,
+
+    'ls skills': () => `<span class="text-blue-400">languages/</span>    Python  C  C++  C#  Java  TypeScript  JavaScript  Rust  Lua
+<span class="text-blue-400">frameworks/</span>   React  .NET  PyTorch  TailwindCSS
+<span class="text-blue-400">tools/</span>        Git  PostgreSQL  Jupyter`,
+
+    'ls': () => `<span class="text-blue-400">skills/</span>  <span class="text-blue-400">projects/</span>  <span class="text-blue-400">education/</span>  <span class="text-stone-300">readme.md</span>`,
+
+    history: () => `<span class="text-stone-500">  1</span>  Student @ UBC <span class="text-stone-500">(2024-present)</span>`,
+
+    'cat readme': () => `<span class="text-stone-300">Thanks for visiting! Feel free to reach out — always happy to chat about code, projects, or basketball.</span>`,
+
+    'cat readme.md': () => commands['cat readme'](),
+
+    cowsay: () => `<span class="text-stone-300"> _______________
+&lt; hire jason!! &gt;
+ ---------------
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||</span>`,
+
+    'sudo hire jason': () => `<span class="text-emerald-400">[sudo] password for recruiter: ********
+✓ Offer extended successfully. Jason has been hired.</span>`,
+
+    'sudo rm -rf /': () => `<span class="text-red-400">rm: nice try. this website is immutable.</span>`,
+    'rm -rf /': () => `<span class="text-red-400">rm: permission denied. try sudo? (don't)</span>`,
+    'rm -rf': () => commands['rm -rf /'](),
+
+    exit: () => `<span class="text-stone-400">There is no escape. You live here now.</span>`,
+    quit: () => commands['exit'](),
+
+    cd: () => `<span class="text-stone-400">You're already home.</span>`,
+    'cd ..': () => `<span class="text-stone-400">You can't leave. Not yet.</span>`,
+    'cd ~': () => `<span class="text-stone-400">You're already home.</span>`,
+
+    pwd: () => `<span class="text-stone-300">/home/jason/website</span>`,
+    date: () => `<span class="text-stone-300">${new Date().toString()}</span>`,
+
+    echo: () => ``,
+
+    ping: () => `<span class="text-stone-300">PING jason (127.0.0.1): 56 bytes
+64 bytes: time=<span class="text-emerald-400">0.042ms</span> — I'm right here, just email me.</span>`,
+
+    vim: () => `<span class="text-stone-400">I use vim btw. But not in the browser.</span>`,
+    emacs: () => `<span class="text-stone-400">Let's not start this debate here.</span>`,
+    nano: () => `<span class="text-stone-400">Respectable choice. But this isn't a real terminal.</span>`,
+  };
+
+  function processCommand(cmd: string): string {
+    const trimmed = cmd.trim().toLowerCase();
+    if (trimmed === '') return '';
+    if (trimmed === 'clear') return '__CLEAR__';
+
+    if (trimmed.startsWith('echo ')) {
+      return `<span class="text-stone-300">${cmd.trim().slice(5)}</span>`;
+    }
+
+    if (trimmed.startsWith('cd ')) {
+      return `<span class="text-stone-400">cd: no such directory: ${cmd.trim().slice(3)}</span>`;
+    }
+
+    if (commands[trimmed]) return commands[trimmed]();
+
+    return `<span class="text-red-400">command not found: ${cmd.trim()}</span> — type <span class="text-amber-400">help</span> for available commands`;
+  }
+
+  function addLine(html: string) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    div.className = 'mb-1';
+    output.appendChild(div);
+  }
+
+  function scrollToBottom() {
+    body.scrollTop = body.scrollHeight;
+  }
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const val = input.value;
+      if (val) {
+        const match = allCommands.find(c => c.startsWith(val.toLowerCase()) && c !== val.toLowerCase());
+        if (match) {
+          input.value = match;
+          ghost.textContent = '';
+        }
+      }
+    } else if (e.key === 'Enter') {
+      const cmd = input.value;
+      input.value = '';
+      ghost.textContent = '';
+
+      addLine(`<span class="text-emerald-400">~</span> <span class="text-stone-400">$</span> <span class="text-stone-200">${cmd}</span>`);
+
+      if (cmd.trim()) {
+        commandHistory.unshift(cmd);
+        historyIndex = -1;
+      }
+
+      const result = processCommand(cmd);
+      if (result === '__CLEAR__') {
+        output.innerHTML = '';
+      } else if (result) {
+        addLine(result);
+      }
+
+      addLine('');
+      scrollToBottom();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+        ghost.textContent = '';
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = -1;
+        input.value = '';
+      }
+      ghost.textContent = '';
+    }
+  });
+
+  body.addEventListener('click', () => input.focus());
+</script>
