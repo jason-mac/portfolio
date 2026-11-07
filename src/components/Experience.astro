@@ -6,14 +6,20 @@ const experiences = [
     logoBg: "bg-white",
     roles: [
       {
-      title: "Software Engineer Intern, AI Compilers",
-        team: "Compilers",
+        title: "Software Engineer Intern, AI Inference",
+        team: "Inference",
         period: "May 2026 - Present",
         location: "Toronto, ON, Canada",
         type: "Internship",
         highlight: true,
-        bullets: ["Incoming intern working on AI compiler stack with LLVM/MLIR-based systems"],
-        skills: ["C++", "Python", "MLIR", "LLVM"]
+        bullets: [
+          "Contributed to a C++ disaggregated LLM inference engine and the tt-mlir compiler stack for PyTorch/JAX",
+          "Deployed Tenstorrent's first disaggregated speculative decoding setup for Kimi K2.7 with a DFlash draft model on 20 decode and 8 prefill nodes via NVIDIA Dynamo's router, hardening it for its production launch on OpenRouter",
+          "Implemented engine-side multi-token prediction (MTP) speculative decoding for models like DeepSeek and GLM to speed up token generation, defining an interface with kernel developers for lookahead tokens in MTP prefill",
+          "Designed a feature enabling prefix caching for linear attention models like Kimi K3, migrating recurrent state snapshots across device memory, host memory, and a global key-value store to reduce TTFT on shared prefixes",
+          "Developed and extended multi-host distributed runtime systems, using Slurm to orchestrate multi-node jobs and integrating performance profiling tools"
+        ],
+        skills: ["C++", "Python", "MLIR", "PyTorch", "Slurm"]
       }
     ]
   }
@@ -27,6 +33,8 @@ const skillColors = {
   React: 'bg-cyan-100/80 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300 border-cyan-200/50 dark:border-cyan-500/20',
   LLVM: 'bg-orange-100/80 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300 border-orange-200/50 dark:border-orange-500/20',
   MLIR: 'bg-indigo-100/80 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300 border-indigo-200/50 dark:border-indigo-500/20',
+  PyTorch: 'bg-rose-100/80 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300 border-rose-200/50 dark:border-rose-500/20',
+  Slurm: 'bg-emerald-100/80 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300 border-emerald-200/50 dark:border-emerald-500/20',
 };
 
 function getSkillClass(skill) {
