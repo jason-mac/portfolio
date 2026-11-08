@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="16" fill="#292524"/>
-  <text x="50" y="68" font-family="system-ui, sans-serif" font-size="52" font-weight="700" fill="#fafaf9" text-anchor="middle">JS</text>
+  <rect width="100" height="100" rx="18" fill="#1c1917"/>
+  <g fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="square" stroke-linejoin="bevel">
+    <path d="M24 30H44M39 30V58C39 66 34 71 27 71C22 71 19 68 18 65"/>
+    <path d="M56 72V31L68.5 55L81 31V72"/>
+  </g>
 </svg>
