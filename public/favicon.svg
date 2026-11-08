@@ -1,7 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="18" fill="#1c1917"/>
-  <g fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="square" stroke-linejoin="bevel">
-    <path d="M24 30H44M39 30V58C39 66 34 71 27 71C22 71 19 68 18 65"/>
-    <path d="M56 72V31L68.5 55L81 31V72"/>
-  </g>
+  <defs>
+    <radialGradient id="ball" cx="38%" cy="32%" r="70%">
+      <stop offset="0" stop-color="#ffd27a"/>
+      <stop offset="0.45" stop-color="#ffa21f"/>
+      <stop offset="1" stop-color="#e86a00"/>
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#ball)"/>
+  <circle cx="50" cy="50" r="47" fill="none" stroke="#c45500" stroke-opacity="0.45" stroke-width="2"/>
+  <path fill="#e3261b" d="M50.38,22.01L52.84,29.36L60.57,29.97L54.34,34.58L56.15,42.12L49.84,37.62L43.23,41.67L45.56,34.27L39.66,29.24L47.42,29.17ZM31.23,41.03L34.45,48.08L42.20,47.88L36.48,53.12L39.07,60.43L32.32,56.61L26.17,61.33L27.72,53.73L21.33,49.34L29.03,48.46ZM69.15,41.06L71.09,48.57L78.76,49.71L72.22,53.88L73.50,61.53L67.52,56.59L60.64,60.17L63.48,52.96L57.95,47.53L65.69,48.00ZM50.00,59.00L52.72,66.26L60.46,66.60L54.39,71.43L56.47,78.90L50.00,74.62L43.53,78.90L45.61,71.43L39.54,66.60L47.28,66.26Z"/>
+  <ellipse cx="33" cy="22" rx="14" ry="7" fill="#ffffff" fill-opacity="0.55" transform="rotate(-32 33 22)"/>
 </svg>
